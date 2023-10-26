@@ -5,6 +5,7 @@ import { list } from '@vercel/blob';
 export default async function Home() {
   const { blobs } = await list();
   const hashtags_data = await get("hashtags") as string;
+  const last_update = await get("last_update") as string;
   const hashtags: string[] = JSON.parse(hashtags_data)
   const hashtag_summaries = Object.assign({},
     ...await Promise.all(hashtags.map(async (hashtag: string) => {
@@ -15,10 +16,11 @@ export default async function Home() {
       return { [hashtag]: data }
     }))
   )
+  console.log(last_update)
   return (
-    <main className="flex min-h-screen p-24">
+    <main className="min-h-screen p-24">
       <h1>Deutsche Bluesky Hashtags</h1>
-
+      <p>Last updated: {(new Date(parseInt(last_update ?? "0"))).toLocaleTimeString()}</p>
       <div>
         {hashtags.map((hashtag: string, i: number) => (
           <p key={i}>
