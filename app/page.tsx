@@ -20,7 +20,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen p-24">
       <h1>Deutsche Bluesky Hashtags</h1>
-      <p>Last updated: {(new Date(parseInt(last_update ?? "0"))).toLocaleTimeString()}</p>
+      <p>Last updated: {(new Date(parseInt(last_update ?? "0"))).toLocaleTimeString('de-DE')}</p>
       <div>
         {hashtags.map((hashtag: string, i: number) => (
           <p key={i}>
